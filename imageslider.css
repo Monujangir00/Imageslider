@@ -1,0 +1,34 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#slider, #navigation{
+    width: 70%;
+    margin: 0 auto;
+}
+#slider{
+    margin-bottom: 1rem;
+    border: 2px solid;
+    overflow: hidden;
+    max-width: 500px;
+    
+}
+.images-container{
+    display: flex;
+    flex-wrap: wrap;
+    
+    
+    
+}
+.images-container img{
+    width: 100%;
+}
+
+#navigation a{
+    text-decoration: none;
+    border: 1px solid black;
+    padding: 5px;
+    margin: 10px;
+    color: black;
+}

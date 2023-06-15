@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Slider</title>
+    <link rel="stylesheet" href="imageslider.css" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="slider">
+        <div class="images-container">
+          <img id="lastImage" src="images/images.jpeg" alt="Slider Image" />
+          <img src="images/download (1).jpeg" alt="Slider Image" />
+          <img src="images/download (2).jpeg" alt="Slider Image" />
+          <img src="images/download (4).jpeg" alt="Slider Image" />
+          <img src="images/download.jpeg" alt="Slider Image" />
+          <img src="images/images (1).jpeg" alt="Slider Image" />
+          <img src="images/images (2).jpeg" alt="Slider Image" />
+          <img src="images/images (3).jpeg" alt="Slider Image" />
+          <img src="images/images (4).jpeg" alt="Slider Image" />
+          <img src="images/images (5).jpeg" alt="Slider Image" />
+          <img src="images/images.jpeg" alt="Slider Image" />
+          <img
+            id="firstImage"
+            src="images/download (1).jpeg"
+            alt="Slider Image"
+          />
+        </div>
+      </div>
+      <div id="navigation">
+        <a href="">Previous</a>
+        <a href="">Next</a>
+      </div>
+    </div>
+    <script>
+      let sliderDiv = document.querySelector("#slider");
+      let imagesContainer = document.querySelector(".images-container");
+      let allimages = document.querySelectorAll("img");
+
+      let prev = document.querySelector("a:first-of-type");
+      let next = document.querySelector("a:last-of-type");
+      let currentslide = 0;
+
+      window.onload = () => {
+        imagesContainer.style.transform =
+          "translateX(-" + sliderDiv.clientWidth * (currentslide + 1) + "px)";
+        currentslide++;
+      };
+
+      allimages.forEach(
+        (img) => (img.style.width = sliderDiv.clientWidth + "px")
+      );
+
+      imagesContainer.style.width =
+        sliderDiv.clientWidth * allimages.length + "px";
+
+      prev.onclick = (e) => {
+        e.preventDefault();
+        imagesContainer.style.transition = "all 0.5s";
+        imagesContainer.style.transform =
+          "translateX(-" + sliderDiv.clientWidth * (currentslide - 1) + "px)";
+        currentslide--;
+      };
+      next.onclick = (e) => {
+        e.preventDefault();
+        imagesContainer.style.transition = "all 0.5s";
+        imagesContainer.style.transform =
+          "translateX(-" + sliderDiv.clientWidth * (currentslide + 1) + "px)";
+        currentslide++;
+      };
+
+      imagesContainer.ontransitionend = () => {
+        // if we have reached the last image, move current slide to first image
+        if (allimages[currentslide].id === "firstImage") {
+          currentslide = 1;
+        }
+        // if we have reached the first image, move current slide to the last image
+        if (allimages[currentslide].id === "lastImage") {
+          currentslide = allimages.length - 2;
+        }
+        // user ki bewkoof banana hai
+        imagesContainer.style.transition = "none";
+
+        // do the transition
+        imagesContainer.style.transform =
+          "translateX(-" + sliderDiv.clientWidth * currentslide + "px)";
+      };
+    </script>
+  </body>
+</html>
